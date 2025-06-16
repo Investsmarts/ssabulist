@@ -1,0 +1,99 @@
+<!-- form.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add New Client</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(to right, #28313B, #485563);
+      color: #fff;
+      padding: 20px;
+    }
+    h2 {
+      text-align: center;
+      color: #00cec9;
+    }
+    form {
+      max-width: 600px;
+      margin: auto;
+      background-color: #1a6139;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+    input {
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #636e72;
+      color: #fff;
+    }
+    input::placeholder {
+      color: #b2bec3;
+    }
+    button {
+      background-color: #00b894;
+      color: #fff;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+    }
+    a {
+      color: #81ecec;
+      display: block;
+      text-align: center;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2> Add New Client</h2>
+  <form id="clientForm">
+    <input type="text" id="name" placeholder="Name" required>
+    <input type="text" id="account" placeholder="Account Number" required>
+    <input type="text" id="exness" placeholder="Exness Account Number" required>
+    <input type="text" id="bankAccount" placeholder="Bank Account Number" required>
+    <input type="text" id="ifsc" placeholder="IFSC Code" required>
+    <input type="number" id="amount" placeholder="Investment Amount" required>
+    <input type="number" id="percent" placeholder="Return %" required>
+    <input type="text" id="mobile" placeholder="Mobile Number" required>
+    <input type="email" id="gmail" placeholder="Gmail ID" required>
+    <input type="date" id="date" required>
+    <button type="submit">Save Client</button>
+    <a href="clients.html"> List</a>
+  </form>
+
+  <script>
+    const form = document.getElementById('clientForm');
+    const clients = JSON.parse(localStorage.getItem('clients') || '[]');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const newClient = {
+        name: form.name.value,
+        account: form.account.value,
+        exness: form.exness.value,
+        bankAccount: form.bankAccount.value,
+        ifsc: form.ifsc.value,
+        amount: form.amount.value,
+        percent: form.percent.value,
+        mobile: form.mobile.value,
+        gmail: form.gmail.value,
+        date: form.date.value
+      };
+      clients.push(newClient);
+      localStorage.setItem('clients', JSON.stringify(clients));
+      alert("✅ Client Saved Successfully!");
+      form.reset();
+    });
+  </script>
+</body>
+</html>
